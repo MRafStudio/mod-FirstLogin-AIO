@@ -71,7 +71,20 @@ public:
         {
             if (FLoginAnnounce)
             {
-                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00FirstLogin-AIO |rmodule.");
+                WorldSession* session = player->GetSession();
+                std::string message = "";
+                switch (session->GetSessionDbLocaleIndex())
+                {
+                case LOCALE_ruRU:
+                {
+                    message = "На сервере запущен модуль";
+                    break;
+                }
+                default:
+                    message = "This server is running the";
+                    break;
+                }
+                ChatHandler(player->GetSession()).SendSysMessage(message + " |cff4CFF00FirstLogin-AIO1 |r");
             }
 
             if (player->getClass() == CLASS_HUNTER)
